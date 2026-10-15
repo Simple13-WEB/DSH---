@@ -113,6 +113,7 @@ jobs:
       # the built artifact under plain Node, resolving plugins through real package
       # exports — the shape a real consumer runs. That requires a prior build.
       - name: Build (lib for the e2e example bins)
+        if: steps.preflight.outputs.has_key == 'true'
         run: pnpm run build
 
       # Real-API end-to-end tests only. The keyless gates (lint/typecheck/
