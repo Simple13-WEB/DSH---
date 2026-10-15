@@ -11,9 +11,10 @@ name: E2E (real DeepSeek API)
 # keyless). The job-level `if:` below skips the whole job for those untrusted
 # PRs. The Dependabot test keys on the PR AUTHOR (pull_request.user.login), not
 # github.actor (the run trigger) — a maintainer reopening a Dependabot PR would
-# make github.actor human while the PR is still keyless. When the job runs, the
-# secret is expected, so the preflight hard-fails if it's missing (a missing
-# secret would otherwise make the self-skipping suite report a false green). A
+# make github.actor human while the PR is still keyless. When the job runs,
+# the preflight probes the secret: if it is missing it emits a warning and skips
+# the real-API e2e instead of hard-failing — a missing secret would otherwise
+# let the self-skipping suite pass silently (a false green). A
 # job skipped by a job-level `if:` reports as a SUCCESSFUL check, so this
 # workflow is safe to use as a required status check if desired.
 #
